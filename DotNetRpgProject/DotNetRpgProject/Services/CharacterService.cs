@@ -13,7 +13,7 @@ namespace DotNetRpgProject.Services
         public async Task<Character> GetCharacter(int id)
         {
             return Characters.SingleOrDefault(c => c.Id == id) 
-                   ?? throw new Exception("Character not found");
+                   ?? throw new Exception("CharacterDto not found");
         }
 
         public async Task<List<Character>> GetAllCharacters()

@@ -1,4 +1,6 @@
-﻿using DotNetRpgProject.Model;
+﻿using AutoMapper;
+using DotNetRpgProject.Model;
+using DotNetRpgProject.Model.Dto;
 using DotNetRpgProject.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,29 +11,39 @@ namespace DotNetRpgProject.Controllers
     public class CharacterController : Controller
     {
         private readonly ICharacterService _characterService;
+        private readonly IMapper _mapper;
 
-        public CharacterController(ICharacterService characterService)
+        public CharacterController(ICharacterService characterService, IMapper mapper)
         {
             _characterService = characterService;
+            _mapper = mapper;
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Character>> GetCharacter(int id)
+        public async Task<ActionResult<CharacterDto>> GetCharacter(int id)
         {
-            return Ok(await _characterService.GetCharacter(id));
+            return Ok(
+                _mapper.Map<CharacterDto>(
+                    await _characterService.GetCharacter(id)));
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Character>>> GetCharacters()
+        public async Task<ActionResult<List<CharacterDto>>> GetCharacters()
         {
-            return Ok(await _characterService.GetAllCharacters());
+            var characters = await _characterService.GetAllCharacters();
+            return Ok(characters.Select(
+                c => _mapper.Map<CharacterDto>(c)));
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<Character>>> CreateCharacter(Character newCharacter)
+        public async Task<ActionResult<IEnumerable<CharacterDto>>> CreateCharacter(Character newCharacter)
         {
             await _characterService.AddCharacter(newCharacter);
-            return await _characterService.GetAllCharacters();
+
+            var characters = await _characterService.GetAllCharacters();
+
+            return Ok(characters.Select(
+                c => _mapper.Map<CharacterDto>(c)));
         }
     }
 }
