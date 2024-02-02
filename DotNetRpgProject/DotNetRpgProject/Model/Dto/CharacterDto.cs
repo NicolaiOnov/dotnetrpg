@@ -1,8 +1,9 @@
-﻿namespace DotNetRpgProject.Model
+﻿using DotNetRpgProject.Model.Entity;
+
+namespace DotNetRpgProject.Model.Dto
 {
-    public class Character
+    public class CharacterDto
     {
-        public int Id { get; set; }
         public string Name { get; set; } = "Frodo";
         public int HitPoints { get; set; } = 100;
         public int Intelligence { get; set; } = 10;
