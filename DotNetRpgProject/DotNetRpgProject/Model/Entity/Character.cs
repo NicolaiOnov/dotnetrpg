@@ -1,4 +1,4 @@
-﻿namespace DotNetRpgProject.Model
+﻿namespace DotNetRpgProject.Model.Entity
 {
     public class Character
     {

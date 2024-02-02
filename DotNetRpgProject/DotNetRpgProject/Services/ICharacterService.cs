@@ -1,4 +1,4 @@
-﻿using DotNetRpgProject.Model;
+﻿using DotNetRpgProject.Model.Entity;
 
 namespace DotNetRpgProject.Services
 {
@@ -7,5 +7,6 @@ namespace DotNetRpgProject.Services
         Task<Character> GetCharacter(int id);
         Task <List<Character>> GetAllCharacters();
         Task AddCharacter(Character newCharacter);
+        Task UpdateCharacter(Character updatedCharacter);
     }
 }

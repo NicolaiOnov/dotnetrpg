@@ -1,4 +1,6 @@
-﻿namespace DotNetRpgProject.Model.Dto
+﻿using DotNetRpgProject.Model.Entity;
+
+namespace DotNetRpgProject.Model.Dto
 {
     public class CharacterDto
     {
